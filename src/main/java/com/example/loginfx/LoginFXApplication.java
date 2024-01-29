@@ -10,21 +10,14 @@ import java.io.IOException;
 
 public class LoginFXApplication extends Application {
 
-    private static Stage stg;
+    private Stage stage;
     @Override
     public void start(Stage stage) throws IOException {
-        stg = stage;
+        this.stage = stage;
         stage.setResizable(false);
-        FXMLLoader fxmlLoader = new FXMLLoader(LoginFXApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
-        stage.setTitle("Sapienza");
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void changeScene(String fxml) throws IOException{
-        Parent pane = FXMLLoader.load(getClass().getResource(fxml));
-        stg.getScene().setRoot(pane);
+        LoginFXController controller = LoginFXController.getInstance();
+        controller.setStage(stage);
+        controller.initialize();
     }
 
     public static void main(String[] args) {
